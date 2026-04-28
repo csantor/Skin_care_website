@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-manrope: "Manrope", sans-serif;
+
+  --color-primary: #006a65;
+  --color-primary-container: #4ca8a1;
+  --color-secondary: #41655f;
+  --color-tertiary: #566342;
+  
+  --color-surface: #f8faf9;
+  --color-surface-low: #f2f4f3;
+  --color-surface-lowest: #ffffff;
+  --color-surface-highest: #e1e3e2;
+  --color-surface-dim: #d8dad9;
+  
+  --color-on-surface: #191c1c;
+  --color-on-surface-variant: #3e4947;
+
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}
+
+@layer base {
+  body {
+    @apply font-manrope bg-surface text-on-surface antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-manrope text-on-surface;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-surface/80 backdrop-blur-xl;
+  }
+  
+  .glass-dark {
+    @apply bg-on-surface/5 backdrop-blur-xl;
+  }
+
+  .no-border-section {
+    @apply border-none;
+  }
+
+  /* Tonal layering utilities */
+  .tonal-card {
+    @apply bg-surface-lowest rounded-xl;
+  }
+
+  .premium-gradient {
+    background: linear-gradient(135deg, #006a65 0%, #4ca8a1 100%);
+  }
+}
