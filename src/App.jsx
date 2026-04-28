@@ -18,21 +18,21 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route 
-                path="/profile" 
+              <Route
+                path="/profile"
                 element={
                   <ProtectedRoute>
                     <Onboarding />
                   </ProtectedRoute>
-                } 
+                }
               />
-              <Route 
-                path="/history" 
+              <Route
+                path="/history"
                 element={
                   <ProtectedRoute>
                     <ProductHistory />
                   </ProtectedRoute>
-                } 
+                }
               />
             </Routes>
           </main>
@@ -44,14 +44,14 @@ function App() {
                 <span className="font-manrope font-extrabold text-xl tracking-tighter">
                   SKIN <span className="text-primary font-medium italic">advisor</span>
                 </span>
-                <p className="text-on-surface-variant text-sm italic">The Dewy Curator &copy; 2026</p>
+                <p className="text-on-surface-variant text-sm italic">Βρες μου κρεμα &copy; 2026</p>
               </div>
 
               <div className="flex gap-12">
                 <div className="space-y-4">
                   <h4 className="font-bold text-xs uppercase tracking-widest text-primary">Science</h4>
                   <ul className="space-y-2 text-sm text-on-surface-variant">
-                    <li className="hover:text-primary cursor-pointer transition-colors">Formulations</li>
+                    <li className="hover:text-primary cursor-pointer transition-colors">Test</li>
                     <li className="hover:text-primary cursor-pointer transition-colors">AI Diagnostics</li>
                     <li className="hover:text-primary cursor-pointer transition-colors">Clinical Trials</li>
                   </ul>

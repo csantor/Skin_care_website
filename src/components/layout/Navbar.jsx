@@ -22,13 +22,13 @@ const Navbar = () => {
       <GlassContainer className="max-w-7xl mx-auto rounded-full flex items-center justify-between px-6 py-2 shadow-sm">
         <Link to="/" className="flex items-center gap-2 group">
           <div className="w-8 h-8 rounded-full premium-gradient flex items-center justify-center text-white font-bold text-xs ring-4 ring-primary/10 group-hover:ring-primary/20 transition-all">
-            SA
+            ΒΚ
           </div>
           <span className="font-manrope font-extrabold text-lg tracking-tight text-on-surface">
-            SKIN <span className="text-primary font-medium italic">advisor</span>
+            ΒΡΕΣ <span className="text-primary font-medium italic">κρέμα</span>
           </span>
         </Link>
-        
+
         <nav className="hidden md:flex items-center gap-8">
           <Link to="/" className="text-on-surface-variant font-medium hover:text-primary transition-colors">Home</Link>
           <Link to="/profile" className="text-on-surface-variant font-medium hover:text-primary transition-colors">Skin Profile</Link>

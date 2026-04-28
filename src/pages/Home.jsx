@@ -8,22 +8,22 @@ const Home = () => {
       {/* Hero Section */}
       <section className="relative overflow-hidden rounded-3xl bg-surface-low min-h-[600px] flex items-center mb-12">
         <div className="absolute inset-y-0 right-0 w-full md:w-2/3 h-full overflow-hidden">
-          <img 
-            src={heroImage} 
-            alt="Premium Skincare" 
+          <img
+            src={heroImage}
+            alt="Premium Skincare"
             className="w-full h-full object-cover scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-surface-low via-surface-low/60 to-transparent"></div>
         </div>
-        
+
         <div className="relative z-10 w-full md:w-1/2 px-8 lg:px-16 space-y-8">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold tracking-wide">
-             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-             THE DEWY CURATOR
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            ΒΡΕΣ ΜΟΥ ΚΡΕΜΑ
           </div>
           <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tighter text-on-surface leading-[0.9]">
-            The Future of <br />
-            <span className="text-primary italic font-medium">Bespoke</span> Skin.
+            Η μελλοντική σου<br />
+            <span className="text-primary italic font-medium">Επιδερμίδα</span>.
           </h1>
           <p className="text-lg text-on-surface-variant max-w-md leading-relaxed">
             Move beyond generic health templates. Our AI curator provides high-end, editorial skincare experiences tailored to your unique morning clarity.
