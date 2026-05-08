@@ -5,12 +5,24 @@ import Home from './pages/Home';
 import Onboarding from './pages/Onboarding';
 import ProductHistory from './pages/ProductHistory';
 import { AuthProvider } from './context/AuthContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import Login from './pages/Login';
+import Catalog from './pages/Catalog';
+import ProductDetail from './pages/ProductDetail';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 
 function App() {
   return (
-    <AuthProvider>
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
+  );
+}
+
+function AppContent() {
+  const { t } = useLanguage();
+  return (
+      <AuthProvider>
       <Router>
         <div className="min-h-screen bg-surface">
           <Navbar />
@@ -34,6 +46,8 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path="/library" element={<Catalog />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
             </Routes>
           </main>
 
@@ -44,12 +58,12 @@ function App() {
                 <span className="font-manrope font-extrabold text-xl tracking-tighter">
                   SKIN <span className="text-primary font-medium italic">advisor</span>
                 </span>
-                <p className="text-on-surface-variant text-sm italic">Βρες μου κρεμα &copy; 2026</p>
+                <p className="text-on-surface-variant text-sm italic" dangerouslySetInnerHTML={{ __html: t('footer.copy') }}></p>
               </div>
 
               <div className="flex gap-12">
                 <div className="space-y-4">
-                  <h4 className="font-bold text-xs uppercase tracking-widest text-primary">Science</h4>
+                  <h4 className="font-bold text-xs uppercase tracking-widest text-primary">{t('footer.science')}</h4>
                   <ul className="space-y-2 text-sm text-on-surface-variant">
                     <li className="hover:text-primary cursor-pointer transition-colors">Test</li>
                     <li className="hover:text-primary cursor-pointer transition-colors">AI Diagnostics</li>
@@ -57,7 +71,7 @@ function App() {
                   </ul>
                 </div>
                 <div className="space-y-4">
-                  <h4 className="font-bold text-xs uppercase tracking-widest text-primary">Journal</h4>
+                  <h4 className="font-bold text-xs uppercase tracking-widest text-primary">{t('footer.journal')}</h4>
                   <ul className="space-y-2 text-sm text-on-surface-variant">
                     <li className="hover:text-primary cursor-pointer transition-colors">Morning Clarity</li>
                     <li className="hover:text-primary cursor-pointer transition-colors">The Glass Texture</li>
@@ -69,7 +83,7 @@ function App() {
           </footer>
         </div>
       </Router>
-    </AuthProvider>
+      </AuthProvider>
   );
 }
 

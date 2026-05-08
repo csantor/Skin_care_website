@@ -1,16 +1,12 @@
-# React + Vite
+# ΒΡΕΣ ΚΡΕΜΑ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Αυτή η ιστοσελίδα είναι φτιαγμένη κάνοντας χρήση εργαλείων AI για τη δοκιμή των δυνατοτήτων τους. Χρησιμοποιείται React για την κατασκευή του interface και η Supabase για την αποθήκευση των δεδομένων του χρήστη. Ο κώδικας έχει γραφτεί με χρήση του εργαλείου Antigravity σε συνεργασία με το Stitch με χρήση MCP (Model Context Protocol). Λειτουργεί με γνώμονα τα στοιχεία που δόθηκαν και σε καμία περίπτωση δεν αποτελεί εμπορικό προϊόν. Προς το παρόν δίνεται η δυνατότητα εγγραφής με email και κωδικό, όπου κατόπιν ερωτήσεων καταγράφονται βασικά στοιχεία για τον τύπο του δέρματος του χρήστη και προτείνονται προϊόντα. Επίσης, δίνεται η δυνατότητα προβολής του ιστορικού των αλληλεπιδράσεων του χρήστη με τον ιστότοπο.
 
-Currently, two official plugins are available:
+# Εργαλεία/Τεχνολογίες
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* React
+* Supabase
+* Google Antigravity
+* Google Stitch
+* MCP
+* Gemini 3.1 Pro and Gemini 3 Flash

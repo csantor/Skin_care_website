@@ -3,9 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import GlassContainer from '../common/GlassContainer';
 import Button from '../common/Button';
 import { useAuth } from '../../context/AuthContext';
+import { useLanguage } from '../../context/LanguageContext';
+import LanguageSwitcher from '../common/LanguageSwitcher';
 
 const Navbar = () => {
   const { user, signOut } = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -25,31 +28,33 @@ const Navbar = () => {
             ΒΚ
           </div>
           <span className="font-manrope font-extrabold text-lg tracking-tight text-on-surface">
-            ΒΡΕΣ <span className="text-primary font-medium italic">κρέμα</span>
+            {t('nav.heroTag').split(' ')[0]} <span className="text-primary font-medium italic">{t('nav.heroTag').split(' ')[2] || 'κρέμα'}</span>
           </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
-          <Link to="/" className="text-on-surface-variant font-medium hover:text-primary transition-colors">Home</Link>
-          <Link to="/profile" className="text-on-surface-variant font-medium hover:text-primary transition-colors">Skin Profile</Link>
-          <Link to="/history" className="text-on-surface-variant font-medium hover:text-primary transition-colors">History</Link>
+          <Link to="/" className="text-on-surface-variant font-medium hover:text-primary transition-colors">{t('nav.home')}</Link>
+          <Link to="/profile" className="text-on-surface-variant font-medium hover:text-primary transition-colors">{t('nav.profile')}</Link>
+          <Link to="/history" className="text-on-surface-variant font-medium hover:text-primary transition-colors">{t('nav.history')}</Link>
+          <Link to="/library" className="text-on-surface-variant font-medium hover:text-primary transition-colors">{t('nav.library')}</Link>
         </nav>
 
         <div className="flex items-center gap-4">
+          <LanguageSwitcher />
           {user ? (
             <>
               <span className="hidden md:block text-xs font-bold text-on-surface-variant truncate max-w-[100px]">
                 {user.email}
               </span>
-              <Button variant="tertiary" className="hidden sm:block" onClick={handleLogout}>Log Out</Button>
+              <Button variant="tertiary" className="hidden sm:block" onClick={handleLogout}>{t('nav.logout')}</Button>
             </>
           ) : (
             <>
               <Link to="/login">
-                <Button variant="tertiary" className="hidden sm:block">Log In</Button>
+                <Button variant="tertiary" className="hidden sm:block">{t('nav.login')}</Button>
               </Link>
               <Link to="/login">
-                <Button variant="primary" className="text-sm px-6 py-2 shadow-lg shadow-primary/20">Get Started</Button>
+                <Button variant="primary" className="text-sm px-6 py-2 shadow-lg shadow-primary/20">{t('nav.getStarted')}</Button>
               </Link>
             </>
           )}
