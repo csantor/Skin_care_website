@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import heroImage from '../assets/hero.png';
 import { useLanguage } from '../context/LanguageContext';
 import Button from '../components/common/Button';
@@ -31,15 +32,20 @@ const Home = () => {
             {t('home.heroDesc')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Button variant="primary" className="text-lg shadow-xl shadow-primary/30">
-              {t('home.startProfile')}
-            </Button>
-            <Button variant="secondary">
-              {t('home.exploreScience')}
-            </Button>
+            <Link to="/profile">
+              <Button variant="primary" className="text-lg shadow-xl shadow-primary/30">
+                {t('home.startProfile')}
+              </Button>
+            </Link>
+            <Link to="/library">
+              <Button variant="secondary">
+                {t('home.exploreScience')}
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
+
 
       {/* Feature Grid - Tonal Layering No Borders */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
