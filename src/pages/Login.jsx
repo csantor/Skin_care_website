@@ -10,8 +10,27 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { signIn, signUp } = useAuth();
+  const [resetSent, setResetSent] = useState(false);
+  const { signIn, signUp, resetPassword } = useAuth();
   const navigate = useNavigate();
+
+  const handleResetPassword = async () => {
+    if (!email) {
+      setError('Please enter your email address to reset password.');
+      return;
+    }
+    setLoading(true);
+    setError(null);
+    try {
+      const { error } = await resetPassword(email);
+      if (error) throw error;
+      setResetSent(true);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +41,7 @@ const Login = () => {
       if (isLogin) {
         const { error } = await signIn({ email, password });
         if (error) throw error;
-        navigate('/onboarding');
+        navigate('/library');
       } else {
         const { error } = await signUp({ email, password });
         if (error) throw error;
@@ -67,11 +86,22 @@ const Login = () => {
           </div>
           
           <div className="space-y-2">
-            <label className="text-sm font-bold tracking-widest uppercase text-on-surface-variant" htmlFor="password">Password</label>
+            <div className="flex justify-between items-center">
+              <label className="text-sm font-bold tracking-widest uppercase text-on-surface-variant" htmlFor="password">Password</label>
+              {isLogin && (
+                <button 
+                  type="button"
+                  onClick={handleResetPassword}
+                  className="text-[10px] font-bold text-primary uppercase tracking-widest hover:underline"
+                >
+                  Forgot?
+                </button>
+              )}
+            </div>
             <input 
               id="password"
               type="password" 
-              required
+              required={!resetSent}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-4 bg-surface-low rounded-xl focus:bg-surface-lowest focus:ring-2 focus:ring-primary/20 outline-none transition-all"
@@ -82,6 +112,12 @@ const Login = () => {
           {error && (
             <div className="p-4 bg-error-container text-on-error-container rounded-xl text-sm font-semibold">
               {error}
+            </div>
+          )}
+
+          {resetSent && (
+            <div className="p-4 bg-primary/10 text-primary rounded-xl text-sm font-semibold animate-fade-in">
+              Password reset link sent to your email.
             </div>
           )}
 
@@ -98,7 +134,11 @@ const Login = () => {
         <div className="text-center">
           <button 
             type="button"
-            onClick={() => setIsLogin(!isLogin)}
+            onClick={() => {
+              setIsLogin(!isLogin);
+              setResetSent(false);
+              setError(null);
+            }}
             className="text-sm font-bold text-primary hover:text-primary-container transition-colors italic hover:underline"
           >
             {isLogin ? 'Need an invitation? Sign up ⇢' : 'Already have access? Sign in ⇢'}
@@ -108,5 +148,6 @@ const Login = () => {
     </div>
   );
 };
+
 
 export default Login;
