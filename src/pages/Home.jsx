@@ -32,7 +32,7 @@ const Home = () => {
             {t('home.heroDesc')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Link to="/profile">
+            <Link to="/onboarding">
               <Button variant="primary" className="text-lg shadow-xl shadow-primary/30">
                 {t('home.startProfile')}
               </Button>

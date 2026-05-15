@@ -44,7 +44,11 @@ const Onboarding = () => {
     if (!user) return;
     setLoading(true);
     try {
-      // 1. Save to Database
+      // 1. Generate Recommendations first
+      const results = await generateRecommendations({ skin_type: skinType, lifestyle, concerns });
+      setRecommendations(results);
+
+      // 2. Save everything to Database
       const { error } = await supabase
         .from('user_profiles')
         .upsert({
@@ -52,18 +56,15 @@ const Onboarding = () => {
           skin_type: skinType,
           lifestyle: lifestyle,
           concerns: concerns,
+          saved_routine: results,
           updated_at: new Date()
         });
 
       if (error) throw error;
-
-      // 2. Generate Recommendations
-      const results = await generateRecommendations({ skin_type: skinType, lifestyle, concerns });
-      setRecommendations(results);
       setStep(4);
     } catch (err) {
       console.error('Error saving profile:', err);
-      // Even if DB fails, show recommendations for the session
+      // Fallback: show recommendations even if DB fails
       const results = await generateRecommendations({ skin_type: skinType, lifestyle, concerns });
       setRecommendations(results);
       setStep(4);

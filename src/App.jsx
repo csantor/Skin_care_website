@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
 import Catalog from './pages/Catalog';
 import ProductDetail from './pages/ProductDetail';
+import Profile from './pages/Profile';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 
 function App() {
@@ -33,10 +34,18 @@ function AppContent() {
               <Route path="/login" element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route
-                path="/profile"
+                path="/onboarding"
                 element={
                   <ProtectedRoute>
                     <Onboarding />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
                   </ProtectedRoute>
                 }
               />

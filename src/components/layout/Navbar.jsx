@@ -43,9 +43,9 @@ const Navbar = () => {
           <LanguageSwitcher />
           {user ? (
             <>
-              <span className="hidden md:block text-xs font-bold text-on-surface-variant truncate max-w-[100px]">
+              <Link to="/profile" className="hidden md:block text-xs font-bold text-on-surface-variant truncate max-w-[100px] hover:text-primary transition-colors">
                 {user.email}
-              </span>
+              </Link>
               <Button variant="tertiary" className="hidden sm:block" onClick={handleLogout}>{t('nav.logout')}</Button>
             </>
           ) : (

@@ -86,22 +86,49 @@ export async function generateRecommendations(profile) {
       .filter(p => p.score > 0)
       .sort((a, b) => b.score - a.score);
 
-    // Build a basic routine: Cleanser, Serum, Treatment/Moisturizer
-    const routine = {
-      cleanser: validProducts.find(p => p.category === 'Cleansers' || p.name.toLowerCase().includes('wash') || p.name.toLowerCase().includes('clean')),
-      serum: validProducts.find(p => (p.name.toLowerCase().includes('serum') || p.name.toLowerCase().includes('booster')) && !p.name.toLowerCase().includes('eye')),
-      treatment: validProducts.find(p => p.category === 'Anti-Aging' || p.category === 'Repair' || p.category === 'Brightening'),
-      moisturizer: validProducts.find(p => p.name.toLowerCase().includes('cream') || p.name.toLowerCase().includes('waterbomb'))
-    };
+    // Build a unique routine
+    const usedIds = new Set();
+    const routineSlots = [
+      { 
+        key: 'cleanser', 
+        filter: p => p.category === 'Cleansers' || p.name.toLowerCase().includes('wash') || p.name.toLowerCase().includes('clean') 
+      },
+      { 
+        key: 'serum', 
+        filter: p => (p.name.toLowerCase().includes('serum') || p.name.toLowerCase().includes('booster')) && !p.name.toLowerCase().includes('eye') 
+      },
+      { 
+        key: 'treatment', 
+        filter: p => ['Anti-Aging', 'Repair', 'Brightening'].includes(p.category) 
+      },
+      { 
+        key: 'moisturizer', 
+        filter: p => p.name.toLowerCase().includes('cream') || p.name.toLowerCase().includes('waterbomb') 
+      }
+    ];
 
-    // Fallback logic if any are missing
-    if (!routine.cleanser) routine.cleanser = validProducts[0];
-    if (!routine.serum) routine.serum = validProducts[1];
-    if (!routine.moisturizer) routine.moisturizer = validProducts[2];
+    const finalRoutine = [];
 
-    return Object.entries(routine)
-      .filter(([_, val]) => !!val)
-      .map(([type, product]) => ({ ...product, routine_type: type }));
+    // First pass: Try to fill slots with matching unique products
+    routineSlots.forEach(slot => {
+      const match = validProducts.find(p => slot.filter(p) && !usedIds.has(p.id));
+      if (match) {
+        usedIds.add(match.id);
+        finalRoutine.push({ ...match, routine_type: slot.key });
+      }
+    });
+
+    // Second pass: If we don't have enough products (e.g. 3), fill with best remaining
+    if (finalRoutine.length < 3) {
+      validProducts.forEach(p => {
+        if (finalRoutine.length < 3 && !usedIds.has(p.id)) {
+          usedIds.add(p.id);
+          finalRoutine.push({ ...p, routine_type: 'essential' });
+        }
+      });
+    }
+
+    return finalRoutine;
 
   } catch (err) {
     console.error('Curator error:', err);
