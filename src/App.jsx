@@ -7,6 +7,7 @@ import ProductHistory from './pages/ProductHistory';
 import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
 import Catalog from './pages/Catalog';
 import ProductDetail from './pages/ProductDetail';
 import ProtectedRoute from './components/layout/ProtectedRoute';
@@ -30,6 +31,7 @@ function AppContent() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route
                 path="/profile"
                 element={

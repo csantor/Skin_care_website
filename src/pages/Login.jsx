@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
@@ -10,27 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [resetSent, setResetSent] = useState(false);
-  const { signIn, signUp, resetPassword } = useAuth();
+  const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
-
-  const handleResetPassword = async () => {
-    if (!email) {
-      setError('Please enter your email address to reset password.');
-      return;
-    }
-    setLoading(true);
-    setError(null);
-    try {
-      const { error } = await resetPassword(email);
-      if (error) throw error;
-      setResetSent(true);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,19 +70,18 @@ const Login = () => {
             <div className="flex justify-between items-center">
               <label className="text-sm font-bold tracking-widest uppercase text-on-surface-variant" htmlFor="password">Password</label>
               {isLogin && (
-                <button 
-                  type="button"
-                  onClick={handleResetPassword}
+                <Link 
+                  to="/forgot-password"
                   className="text-[10px] font-bold text-primary uppercase tracking-widest hover:underline"
                 >
                   Forgot?
-                </button>
+                </Link>
               )}
             </div>
             <input 
               id="password"
               type="password" 
-              required={!resetSent}
+              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-4 bg-surface-low rounded-xl focus:bg-surface-lowest focus:ring-2 focus:ring-primary/20 outline-none transition-all"
@@ -112,12 +92,6 @@ const Login = () => {
           {error && (
             <div className="p-4 bg-error-container text-on-error-container rounded-xl text-sm font-semibold">
               {error}
-            </div>
-          )}
-
-          {resetSent && (
-            <div className="p-4 bg-primary/10 text-primary rounded-xl text-sm font-semibold animate-fade-in">
-              Password reset link sent to your email.
             </div>
           )}
 
@@ -136,7 +110,6 @@ const Login = () => {
             type="button"
             onClick={() => {
               setIsLogin(!isLogin);
-              setResetSent(false);
               setError(null);
             }}
             className="text-sm font-bold text-primary hover:text-primary-container transition-colors italic hover:underline"
@@ -148,6 +121,7 @@ const Login = () => {
     </div>
   );
 };
+
 
 
 export default Login;
